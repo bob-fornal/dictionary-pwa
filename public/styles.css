@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+}
+
+header {
+  background-color: red;
+  box-sizing: border-box;
+  color: white;
+  font-family: Arial;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1rem;
+  padding: 1rem 0.5rem;
+  text-align: center;
+
+  height: 4rem;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
