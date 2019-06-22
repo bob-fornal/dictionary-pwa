@@ -11,19 +11,46 @@
   <title>ABC</title>
 </head>
 
+<style>
+  body {
+    background-color: lightsteelblue;
+  }
+</style>
+
 <body>
   <header>
     <div>ABC's of What You Want to Know</div>
   </header>
 
-  <div class="container">
-    <div class="book-one">Dinosaurs<img src=""/></div>
+  <div id="books" class="books"></div>
 
-    <div class="book-two">D&D<img src=""/></div>
+  <script src="storage.js"></script>
+  <script>
+    const storage = new Storage();
+    buildBooks();
 
-    <div class="book-three">Programming<img src=""/></div>
+    function buildBooks() {
+      const books = storage.getAllBooks();
+      const booksElement = document.getElementById('books');
 
-  </div>
+      let html = '';
+      for (let book of books) {
+        if (book.template.length > 0) {
+          html += `<div class="book btn default">\n`;
+          html += `  <div class="display" onclick="selectBook('${book.template}')">\n`;
+          html += `    <div class="name">${book.name}</div>\n`;
+          html += `  </div>\n`;
+          html += `</div>\n`;
+        }
+      }
+      booksElement.innerHTML = html;
+      console.log(html);
+
+    }
+
+  </script>
+
+  <div id="categories" class="categories"></div>
 
 </body>
 

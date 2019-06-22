@@ -6,7 +6,7 @@ class Storage {
     let booksData = [
       { name: "Dinosaurs", template: "book-dinosaur.html", images: true },
       { name: "D&D Monsters", template: "", images: true },
-      { name: "Programming", template: "", images: false }
+      { name: "Programming", template: "book-computer.html", images: false }
     ];
     return booksData;
   }
