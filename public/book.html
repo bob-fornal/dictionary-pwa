@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Dictionary</title>
+  <link rel="manifest" href="/manifest.json">
+
+  <meta name="theme-color" content="#2196f3" />
+
+  <link href="styles.css" rel="stylesheet" type="text/css" />
+  <style>
+    body {
+      --letter-color: maroon;
+      --letter-size: 4rem;
+
+      --image-pad: 1rem;
+    }
+
+    .import-content {
+      margin-top: 4rem;
+    }
+
+    .header:after {
+      content: "-";
+    }
+
+    .header:before {
+      content: "-";
+    }
+
+    .header {
+      font-family: Arial;
+      font-weight: bold;
+      font-size: var(--letter-size);
+      color: var(--letter-color);
+      text-align: center;
+    }
+
+    .card {
+      font-family: Arial;
+      font-size: 1.1rem;
+      margin: 0 1rem 1rem 1rem;
+      border: 2px solid gold;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    .card .description img {
+      padding: 0 var(--image-pad);
+      width: calc(100% - calc(2 * var(--image-pad)));
+    }
+
+    .description {
+      font-size: .9rem;
+    }
+
+    .description p {
+      margin: 0;
+    }
+    .description p:not(:first-of-type) {
+      margin-top: 1rem;
+    }
+
+    /* pronunciation / name ... */
+  </style>
+</head>
+
+<body>
+  <header>
+    <a class="return" href="/">
+      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        x="0px" y="0px" width="459px" height="459px" viewBox="0 0 459 459" xml:space="preserve">
+        <g id="reply">
+          <path
+            d="M178.5,140.25v-102L0,216.75l178.5,178.5V290.7c127.5,0,216.75,40.8,280.5,130.05C433.5,293.25,357,165.75,178.5,140.25z" />
+        </g>
+      </svg>
+    </a>
+    <div>ABC's of What You Want to Know</div>
+    <div id="book"></div>
+  </header>
+
+  <script src="storage.js"></script>
+  <script>
+    const storage = new Storage();
+    const book = storage.getActiveBook();
+
+    const title = document.getElementById('book');
+    title.innerText = book.name;
+
+    const templateLocation = `/templates/${ book.template }`;
+    fetch(templateLocation)
+      .then(function (response) {
+        return response.text()
+      })
+      .then(function (html) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(html, "text/html");
+
+        const content = doc.querySelector('.import-content');
+        document.body.appendChild(content.cloneNode(true));
+      })
+      .catch(function (err) {
+        console.log('Failed to fetch page: ', err);
+      });
+  </script>
+</body>
+
+</html>

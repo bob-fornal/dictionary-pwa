@@ -15,6 +15,13 @@
   body {
     background-color: lightsteelblue;
   }
+
+  .books {
+    background-color: white;
+    margin-top: 4rem;
+    padding: 1rem;
+    position: relative;
+  }
 </style>
 
 <body>
@@ -37,17 +44,19 @@
       for (let book of books) {
         if (book.template.length > 0) {
           html += `<div class="book btn default">\n`;
-          html += `  <div class="display" onclick="selectBook('${book.template}')">\n`;
+          html += `  <div class="display" onclick="selectBook('${book.name}', '${book.template}')">\n`;
           html += `    <div class="name">${book.name}</div>\n`;
           html += `  </div>\n`;
           html += `</div>\n`;
         }
       }
       booksElement.innerHTML = html;
-      console.log(html);
-
     }
 
+    function selectBook(name, template) {
+      storage.setActiveBook({ name, template });
+      window.location.href = 'book.html';
+    }
   </script>
 
   <div id="categories" class="categories"></div>
